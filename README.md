@@ -1,5 +1,5 @@
 # uqtdev's personal dotfiles
-(https://youtu.be/r_MpUP6aKiQ "Video used as reference")
+[Video used as reference](https://youtu.be/r_MpUP6aKiQ)
 
 My personal dotfiles..
 
