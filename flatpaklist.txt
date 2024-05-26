@@ -1,0 +1,16 @@
+com.basemark.BasemarkGPU
+com.github.iwalton3.jellyfin-media-player
+com.jgraph.drawio.desktop
+com.nextcloud.desktopclient.nextcloud
+com.spotify.Client
+dev.vencord.Vesktop
+io.github.Qalculate.qalculate-qt
+io.github.giantpinkrobots.flatsweep
+io.mrarm.mcpelauncher
+one.ablaze.floorp
+org.flathub.flatpak-external-data-checker
+org.kde.kdenlive
+org.kde.kpat
+org.prismlauncher.PrismLauncher
+org.wireshark.Wireshark
+uk.org.greenend.chiark.sgtatham.putty
