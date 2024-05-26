@@ -1,11 +1,13 @@
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
 [user]
-	name = Patrick McDonald
-	email = 66495007+eieioxyz@users.noreply.github.com
-
-
-
-# Other possible Git configurations.
-# - Set the default editor (nano, VS Code, etc.)
-# - Customize color output
-# - Create aliases (shortcuts for Git subcommands)
-# - Add endpoint shortcuts for commonly used URLs
+	email = 30967156+uqtdev@users.noreply.github.com
