@@ -29,6 +29,16 @@ function install_pacman {
 	flatpak_arch
 }
 
+function install_yay {
+	echo "Installing packages from yay"
+	sudo -u "$USERNAME" yay -S --needed - < "aur-packages.txt"
+	if [ $? -eq 0 ]; then
+		echo "All Packages Installed Successfully"
+	else
+		echo "There was an error in the install"
+	fi
+}
+
 function flatpak_arch {
 	echo "Setting up Flatpak & Flathub"
 	if ! command -v flatpak &> /dev/null; then
@@ -55,6 +65,7 @@ echo "Distro Detected as $DISTRO_NAME on $DISTRO_VERSION, package installs shoul
 if [[ "$DISTRO_NAME" == "Arch Linux" ]]; then
 	echo "Arch detected, Running Arch Install "
 	install_pacman
+	install_yay
 else
 	echo "Your distro appears to not have a match in this script. This could be an error, or you could be inferior."
 fi
