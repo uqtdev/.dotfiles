@@ -6,5 +6,5 @@ symlinks.sh
 echo "Symlinks finished!"
 
 echo "Running bitwarden.."
-flatpak run com.bitwarden.desktop &
+sudo -u "$SUDO_USER" nohup flatpak run com.bitwarden.desktop > /dev/null 2>&1 &
 echo "Bitwarden running. Go crazy!"

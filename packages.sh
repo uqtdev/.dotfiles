@@ -1,8 +1,6 @@
 #!/bin/bash
 
-flatpak_ready=FALSE
-
-detect_distro() {
+function detect_distro {
     if [ -f /etc/os-release ]; then
         source /etc/os-release
         DISTRO_NAME=$NAME
@@ -22,7 +20,7 @@ detect_distro() {
 }
 
 # Install Pacman Packages
-install_pacman() {
+function install_pacman {
 	echo "Installing Pacman Packages.."
 	sudo pacman -Syu --noconfirm
 	sudo pacman -S --needed --noconfirm - < pkglist.txtpacman
@@ -31,7 +29,7 @@ install_pacman() {
 	flatpak_arch
 }
 
-flatpak_arch() {
+function flatpak_arch {
 	echo "Setting up Flatpak & Flathub"
 	if ! command -v flatpak &> /dev/null; then
 		echo "Flatpak isn't installed, installing"
@@ -42,7 +40,7 @@ flatpak_arch() {
 	install_flatpak
 }
 
-install_flatpak() {
+function install_flatpak {
 	echo "Installing Flatpak apps.."
 	while IFS= read -r app ; do
 		flatpak install -y flathub "$app" 
@@ -52,8 +50,12 @@ install_flatpak() {
 
 detect_distro
 
-if DISTRO_NAME = "Arch Linux"; then
+echo "Distro Detected as $DISTRO_NAME on $DISTRO_VERSION, package installs should commence after this."
+
+if [[ "$DISTRO_NAME" == "Arch Linux" ]]; then
 	echo "Arch detected, Running Arch Install "
 	install_pacman
-
+else
+	echo "Your distro appears to not have a match in this script. This could be an error, or you could be inferior."
+fi
 echo "All Packages Installed"
