@@ -14,3 +14,4 @@ org.kde.kpat
 org.prismlauncher.PrismLauncher
 org.wireshark.Wireshark
 uk.org.greenend.chiark.sgtatham.putty
+com.bitwarden.desktop

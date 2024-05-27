@@ -39,9 +39,13 @@ flatpak_arch() {
 	fi
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	echo "Flatpak and Flathub setup"
+	install_flatpak
+}
+
+install_flatpak() {
 	echo "Installing Flatpak apps.."
-	while IFS= read -r app; do
-		flatpak install -y flathub "$app"
+	while IFS= read -r app ; do
+		flatpak install -y flathub "$app" 
 	done < flatpaklist.txt
 	echo "Flatpak apps installed"
 }
@@ -49,6 +53,7 @@ flatpak_arch() {
 detect_distro
 
 if DISTRO_NAME = "Arch Linux"; then
+	echo "Arch detected, Running Arch Install "
 	install_pacman
 
 echo "All Packages Installed"
