@@ -19,14 +19,22 @@ function detect_distro {
     export DISTRO_VERSION
 }
 
+function install_generic {
+	echo "Installing oh-my-zsh.."
+	if [[ -d "/home/$USERNAME/.oh-my-zsh" ]]; then
+		echo "oh-my-zsh already installed, skipping"
+	else 
+		sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+	fi
+}
+
+
 # Install Pacman Packages
 function install_pacman {
 	echo "Installing Pacman Packages.."
 	sudo pacman -Syu --noconfirm
 	sudo pacman -S --needed --noconfirm - < pkglist.txtpacman
 	echo "Pacman install finished"
-	echo "Flatpak"
-	flatpak_arch
 }
 
 function install_yay {
@@ -39,14 +47,41 @@ function install_yay {
 	fi
 }
 
-function flatpak_arch {
+function dnf_add_repositories {
+    repo_file="fedora-repos"
+    while IFS= read -r repo; do
+        # Skip empty lines and comments
+        [[ -z "$repo" || "$repo" =~ ^# ]] && continue
+
+        # Extract the repo name from the URL
+        repo_name=$(basename "$repo" .repo)
+
+        # Check if the repo is already added
+        if sudo dnf repolist --all | grep -q "^$repo_name"; then
+            echo "Repository $repo_name is already added."
+        else
+            echo "Adding repository: $repo"
+            sudo dnf config-manager --add-repo "$repo"
+        fi
+    done < "$repo_file"
+}
+
+function install_dnf {
+	echo "Installing dnf packages"
+	dnf update -y
+	bash fedora-repos.sh
+	sudo dnf install -y $(grep -v '^\s*#' fedora-packages | tr '\n' ' ')
+	echo "Fedora packages installed"
+}
+
+function flatpak_check {
 	echo "Setting up Flatpak & Flathub"
 	if ! command -v flatpak &> /dev/null; then
-		echo "Flatpak isn't installed, installing"
-		sudo pacman -S flatpak --noconfirm
+		echo "Flatpak isn't installed, cannot install flatpak packages"
+		
+		exit 1
 	fi
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	echo "Flatpak and Flathub setup"
 	install_flatpak
 }
 
@@ -66,7 +101,19 @@ if [[ "$DISTRO_NAME" == "Arch Linux" ]]; then
 	echo "Arch detected, Running Arch Install "
 	install_pacman
 	install_yay
+elif [[ "$DISTRO_NAME" == "Fedora Linux" ]]; then
+	echo "Fedora Detected, Installing Fedora insall"
+	dnf_add_repositories
+	install_dnf
 else
 	echo "Your distro appears to not have a match in this script. This could be an error, or you could be inferior."
 fi
-echo "All Packages Installed"
+flatpak_check
+install_generic
+echo "[ = ---------------- = ]"
+echo " All Packages Installed "
+echo "[ = ---------------- = ]"
+echo " Debug info ........... "
+echo " USERNAME $USERNAME"
+echo " DISTRO_NAME $DISTRO_NAME"
+echo " DISTRO_VERSION $DISTRO_VERSION"
