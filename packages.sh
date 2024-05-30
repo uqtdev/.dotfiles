@@ -39,7 +39,7 @@ function install_pacman {
 
 function install_yay {
 	echo "Installing packages from yay"
-	sudo -u "$USERNAME" yay -S --needed - < "aur-packages.txt"
+	su -u "$USERNAME" yay -S --needed - < "aur-packages.txt"
 	if [ $? -eq 0 ]; then
 		echo "All Packages Installed Successfully"
 	else

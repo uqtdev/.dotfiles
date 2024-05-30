@@ -1,51 +1,65 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
-
 ### Variables
+
 #
-# Logo key. Use Mod1 for Alt.
+# Super Key, Use Mod1 for Alt. Mod4 for winkey / command
+#
 set $mod Mod4
-# Home row direction keys, like vim
+
+#
+# - Home row direction keys
+#
 set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
+#
+# - Terminal emulator
+#
 set $term kitty
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
+
+#
+# - App Launcher
+#
 set $menu rofi -show drun | xargs swaymsg exec --
+
+#
+# - Web Browser
+#
+set $web flatpak run one.ablaze.floorp
+
+#
+# - Matrix App
+#
+set $matrix flatpak run im.riot.Riot
+
+#
+# - Discord App
+#
+set $discord flatpak run dev.vencord.Vesktop
 
 ### Output configuration
 #
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# wallpaper 
 #
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+output * bg ~/.dotfiles/themeing/backgrounds/howls-castle-mountains.jpg fill
+#exec_always --no-startup-id ~/.dotfiles/bin/cycle_wallpapers.sh
 
+#
+# - Outputs
+#
+output DP-1 resolution 1920x1080@165Hz position 1920,0
+
+output HDMI-A-1 resolution 1920x1080 position 0,0
 ### Idle configuration
 #
 # Example configuration:
 #
 exec swayidle -w \
-          timeout 300 'swaylock -f -c 000000' \
-          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+          timeout 3600 'swaylock -f -c 000000' \
+          timeout 5200 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
 ### Input configuration
-#
+
 # Example configuration:
 #
 #   input "2:14:SynPS/2_Synaptics_TouchPad" {
@@ -65,11 +79,15 @@ exec swayidle -w \
     # Start a terminal
     bindsym $mod+Return exec $term
 
+    #bindsym $mod+f exec $web
+
+    bindsym $mod+d exec $matrix
+
     # Kill focused window
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    bindsym $mod+Shift+d exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -121,6 +139,7 @@ exec swayidle -w \
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
+
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -149,7 +168,7 @@ exec swayidle -w \
     bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+    bindsym $mod+Shift+f fullscreen
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle
 
@@ -225,6 +244,9 @@ client.focused          "#4b4b5e" "#2b2b3a"      "#e0e0e0"   "#5c5c72" "#4b4b5e"
 
 client.focused_inactive "#3c3c4f" "#2a2a35"      "#a8a8b0"   "#5c5c72" "#4b4b5e"
 
-client.unfocused        "#4b4b5e" "#1d1d28"      "#808080"   "#5c5c72" "#4b4b5e"
+seat seat0 xcursor_theme Bibata-Original-Ice 24
+
+exec $matrix
+exec $discord
 
 include /etc/sway/config.d/*
