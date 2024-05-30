@@ -10,7 +10,6 @@ CURSOR_THEME_DIR="$DOTFILES_DIR/themeing/cursors/"
 
 # Create destination directory if it doesn't exist
 #mkdir -p "$SHARE_DIR/icons/$ICON_THEME_NAME"
-
 #sudo ln -sfn "$CURSOR_THEME_DIR"/ "$SHARE_DIR/$CURSOR_THEME_NAME"/
 sudo ln -sfn "$ICON_THEME_DIR/$ICON_THEME_NAME"/ "$SHARE_DIR/icons/$ICON_THEME_NAME"
 
