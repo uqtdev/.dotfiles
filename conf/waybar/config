@@ -20,14 +20,13 @@
             "activated": "",
             "deactivated": ""
         },
-		"on-click": "bash /home/dg/.local/bin/toggleRemote"
     },
     "tray": {
         "icon-size": 15,
         "spacing": 10
     },
     "clock": {
-    	"format": "{:%H:%M:%S | %B %d, %Y}",
+    	"format": "{:%H : %M : %S | %B %d, %Y}",
 	"interval": 1
     },
     "pulseaudio": {
