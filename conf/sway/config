@@ -249,4 +249,10 @@ seat seat0 xcursor_theme Bibata-Original-Ice 24
 exec $matrix
 exec $discord
 
+bindsym XF86MonBrightnessUp exec sh -c 'current=$(brightnessctl g); max=$(brightnessctl m); new=$((current + 10)); [ $new -gt $max ] && new=$max; brightnessctl s $new'
+
+bindsym XF86MonBrightnessDown exec sh -c 'current=$(brightnessctl g); new=$((current - 10)); [ $new -lt 0 ] && new=0; brightnessctl s $new'
+
+include keybinds
+
 include /etc/sway/config.d/*
