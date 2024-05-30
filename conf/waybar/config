@@ -1,8 +1,8 @@
 {
     "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["clock", "idle_inhibitor"],
-    /* "modules-right": ["tray", "custom/scratchpad-indicator", "network", "pulseaudio", "custom/power"], */
-    "modules-right": ["tray", "custom/scratchpad-indicator", "network", "pulseaudio", "battery", "custom/power"],
+    "modules-center": ["clock"],
+    /* "modules-right": [ "idle_inhibitor","tray", "custom/scratchpad-indicator", "network", "pulseaudio", "custom/power"], */
+    "modules-right": ["idle_inhibitor", "tray", "custom/scratchpad-indicator", "network", "pulseaudio", "battery", "custom/power"],
 
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
@@ -27,8 +27,8 @@
         "spacing": 10
     },
     "clock": {
-    	"on-click": "gnome-calendar",
-    	"format": "{:%H:%M:%S} | {:%B %d, %Y}"
+    	"format": "{:%H:%M:%S | %B %d, %Y}",
+	"interval": 1
     },
     "pulseaudio": {
         "format": "{volume}% {icon} ",
