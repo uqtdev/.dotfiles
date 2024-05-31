@@ -22,9 +22,47 @@
 #
 
 #
-# - Brightness Keybinds
+# - Terms
+#
+set $sup bindsym $mod
+
+#
+# - Hotkeys - For Laptop
 #
 
-bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-bindsym f $term
-bindsym XF86MonBrightnessUp exec brightnessctl set -5%
+# - Brightness Up
+bindsym XF86MonBrightnessUp exec sh -c 'current=$(birghtnessctl g); max=$(brightnessctl m); new=$((current + 10)); [ $new -gt $max ] && new=$max; brightnessctl s $new'
+# - Brightness Down
+bindsym XF86MonBrightnessDown exec sh -c 'current=$(brightness g); new=$((rrent - 10)); [ $new -lt 0 ] && new=0; brightnessctl s $new'
+
+#
+# - Application Keybinds
+#
+
+# - Terminal
+$sup+Return exec $term
+# - File Explorer
+$sup+apostrophe exec $files
+# - Web Browser
+$sup+backslash exec $web
+# - Matrix Client
+$sup+d exec $matrix
+#
+# - Utility Keybinds
+#
+
+# - Logout
+$sup+Shift+e exec swaynag -t warning -m 'Exit Sway?' -B 'Yes, Exit Sway' 'swaymsg exit'
+# - Reload this configuration
+$sup+Shift+c reload
+# - Kill Focused Window
+$sup+Shift+q kill
+# - Application Launcher
+$sup+shift+d exec $menu
+
+#
+# - Movement
+#
+
+# Focus
+$sup+$left focus left

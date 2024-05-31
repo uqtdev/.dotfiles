@@ -1,4 +1,5 @@
 {
+    "output": ["DP-1"],
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["clock"],
     /* "modules-right": [ "idle_inhibitor","tray", "custom/scratchpad-indicator", "network", "pulseaudio", "custom/power"], */

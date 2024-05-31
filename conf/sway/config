@@ -68,44 +68,14 @@ exec swayidle -w \
 #       natural_scroll enabled
 #       middle_emulation enabled
 #   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
 
-### Key bindings
-#
-# Basics:
-#
-    # Start a terminal
-    bindsym $mod+Return exec $term
-
-    #bindsym $mod+f exec $web
-
-    bindsym $mod+d exec $matrix
-
-    # Kill focused window
-    bindsym $mod+Shift+q kill
-
-    # Start your launcher
-    bindsym $mod+Shift+d exec $menu
-
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
     floating_modifier $mod normal
 
-    # Reload the configuration file
-    bindsym $mod+Shift+c reload
-
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 #
 # Moving around:
 #
     # Move your focus around
-    bindsym $mod+$left focus left
+
     bindsym $mod+$down focus down
     bindsym $mod+$up focus up
     bindsym $mod+$right focus right
@@ -190,8 +160,7 @@ exec swayidle -w \
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
 
-    bindsym $mod+backslash exec flatpak run one.ablaze.floorp
-    bindsym $mod+apostrophe exec dolphin
+
 #
 # Resizing containers:
 #
@@ -217,23 +186,6 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-#bar {
-#    position top
-#
-#    # When the status_command prints a new line to stdout, swaybar updates.
-#    # The default just shows the current date and time.
-#    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-#
-#    colors {
-#        statusline #ffffff
-#        background #323232
-#        inactive_workspace #32323200 #32323200 #5c5c5c
-#    }
-
 bar { 
      swaybar_command waybar
 }
@@ -248,10 +200,6 @@ seat seat0 xcursor_theme Bibata-Original-Ice 24
 
 exec $matrix
 exec $discord
-
-bindsym XF86MonBrightnessUp exec sh -c 'current=$(brightnessctl g); max=$(brightnessctl m); new=$((current + 10)); [ $new -gt $max ] && new=$max; brightnessctl s $new'
-
-bindsym XF86MonBrightnessDown exec sh -c 'current=$(brightnessctl g); new=$((current - 10)); [ $new -lt 0 ] && new=0; brightnessctl s $new'
 
 include keybinds
 

@@ -13,6 +13,7 @@ ln -nf conf/waybar/config $CONF/waybar/config
 ln -nf conf/waybar/style.css $CONF/waybar/style.css
 ln -nf conf/kitty/kitty.conf $CONF/kitty/kitty.conf
 ln -nf conf/sway/config $CONF/sway/config
+ln -nf conf/sway/keybinds $CONF/sway/keybinds
 ln -nf conf/rofi/config.rasi $CONF/rofi/config.rasi
 ln -nf conf/.gitconfig $HOME_DIR/.gitconfig
 ln -nf conf/.zshrc $HOME_DIR/.zshrc
