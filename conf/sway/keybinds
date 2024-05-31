@@ -64,5 +64,22 @@ $sup+shift+d exec $menu
 # - Movement
 #
 
-# Focus
+# Focus - Changes currently selected menu, moves mouse
 $sup+$left focus left
+$sup+Left focus left
+$sup+$right focus right
+$sup+Right focus right
+$sup+$up focus up
+$sup+Up focus up
+$sup+$down focus down
+$sup+Down focus down
+
+# Move Focused Window
+$sup+Shift+$left move left
+$sup+Shift+Left move left
+$sup+Shift+$right move right
+$sup+Shift+Right move right
+$sup+Shift+$up move up
+$sup+Shift+Up move up
+$sup+Shift+$down move down
+$sup+Shift+Down move down
